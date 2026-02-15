@@ -50,7 +50,13 @@ def verify_calc_gui():
     print("Test: New Sheet (Shift+F11)")
     pyautogui.hotkey('shift', 'f11')
     time.sleep(1)
-    # Should be on Sheet 2.
+
+    # Handle potential "Insert Sheet" dialog (Calc sometimes asks for name/position)
+    # Pressing Enter confirms default (which is usually OK)
+    pyautogui.press('enter')
+    time.sleep(1)
+
+    # Should be on Sheet 2 (or new sheet)
     pyautogui.write("Sheet2Data", interval=0.1)
     pyautogui.press('enter')
 
