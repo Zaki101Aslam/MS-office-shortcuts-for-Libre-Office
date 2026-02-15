@@ -53,6 +53,12 @@ for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
 for i in range(1, 13):
     KEY_MAP[f"F{i}"] = f"KEY_F{i}"
 
+# Blocked Shortcuts (System conflicts)
+BLOCKED_SHORTCUTS = {
+    "ALT+F4", "CTRL+ALT+DELETE", "CTRL+SHIFT+ESC", "ALT+TAB", "ALT+SPACE",
+    "CTRL+ESC", "WIN", "META"
+}
+
 def parse_shortcut(shortcut_str):
     # Handle Ctrl++ case where split("+") creates empty strings
     # "Ctrl++" -> ["Ctrl", "", ""]
@@ -136,6 +142,12 @@ def create_xml(mappings):
     for mapping in mappings:
         shortcut = mapping["ms_shortcut"]
         command = mapping["uno_command"]
+
+        # Check for blocked shortcuts
+        norm_shortcut = shortcut.upper().replace(" ", "")
+        if norm_shortcut in BLOCKED_SHORTCUTS:
+            print(f"Skipping blocked system shortcut: {shortcut}")
+            continue
 
         code, modifiers = parse_shortcut(shortcut)
 
