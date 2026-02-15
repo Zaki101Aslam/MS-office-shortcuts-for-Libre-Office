@@ -44,8 +44,8 @@ If you want to change any of the mappings or add new ones, you can use the inclu
 
 1.  Clone this repository.
     ```bash
-    git clone <repo_url>
-    cd <repo_folder>
+    git clone https://github.com/Zaki101Aslam/MS-office-shortcuts-for-Libre-Office
+    cd MS-office-shortcuts-for-Libre-Office
     ```
 
 2.  Run the customization script in interactive mode:
