@@ -168,12 +168,36 @@ def create_manifest():
  <manifest:file-entry manifest:full-path="Configurations2/accelerator/current.xml" manifest:media-type=""/>
 </manifest:manifest>"""
 
-def generate_package(json_path, output_path):
+def generate_package(json_path, output_path, defaults_path=None):
     print(f"Reading {json_path}...")
     with open(json_path, 'r') as f:
-        mappings = json.load(f)
+        custom_mappings = json.load(f)
 
-    xml_content = create_xml(mappings)
+    # Load defaults if provided
+    final_mappings = []
+    if defaults_path and os.path.exists(defaults_path):
+        print(f"Reading defaults from {defaults_path}...")
+        with open(defaults_path, 'r') as f:
+            default_mappings = json.load(f)
+
+        # Create a dictionary of custom shortcuts to easily check for overrides
+        # Keying by shortcut string (normalized) to detect conflicts
+        custom_keys = {m["ms_shortcut"].upper().replace(" ", ""): m for m in custom_mappings}
+
+        # Add defaults ONLY if they don't conflict with custom mappings
+        for default in default_mappings:
+            key = default["ms_shortcut"].upper().replace(" ", "")
+            if key not in custom_keys:
+                final_mappings.append(default)
+            else:
+                print(f"Overriding default {default['ms_shortcut']} with custom {custom_keys[key]['ms_shortcut']}")
+
+        # Add all custom mappings
+        final_mappings.extend(custom_mappings)
+    else:
+        final_mappings = custom_mappings
+
+    xml_content = create_xml(final_mappings)
     manifest_content = create_manifest()
 
     with zipfile.ZipFile(output_path, 'w') as zf:
@@ -234,12 +258,16 @@ def interactive_mode():
                     os.makedirs("dist")
 
                 out_path = f"dist/Word_Shortcuts_for_Writer.cfg"
+                def_path = "defaults/writer.json"
+
                 if app_name == "Calc":
                     out_path = f"dist/Excel_Shortcuts_for_Calc.cfg"
+                    def_path = "defaults/calc.json"
                 elif app_name == "Impress":
                     out_path = f"dist/PowerPoint_Shortcuts_for_Impress.cfg"
+                    def_path = "defaults/impress.json"
 
-                generate_package(filepath, out_path)
+                generate_package(filepath, out_path, def_path)
             break
         elif opt == "E":
             idx = int(input("Enter number to edit: ")) - 1
@@ -279,8 +307,8 @@ if __name__ == "__main__":
             os.makedirs("dist")
 
         if os.path.exists("mappings/writer.json"):
-            generate_package("mappings/writer.json", "dist/Word_Shortcuts_for_Writer.cfg")
+            generate_package("mappings/writer.json", "dist/Word_Shortcuts_for_Writer.cfg", "defaults/writer.json")
         if os.path.exists("mappings/calc.json"):
-            generate_package("mappings/calc.json", "dist/Excel_Shortcuts_for_Calc.cfg")
+            generate_package("mappings/calc.json", "dist/Excel_Shortcuts_for_Calc.cfg", "defaults/calc.json")
         if os.path.exists("mappings/impress.json"):
-            generate_package("mappings/impress.json", "dist/PowerPoint_Shortcuts_for_Impress.cfg")
+            generate_package("mappings/impress.json", "dist/PowerPoint_Shortcuts_for_Impress.cfg", "defaults/impress.json")
