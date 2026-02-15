@@ -61,6 +61,21 @@ If you want to change any of the mappings or add new ones, you can use the inclu
 
 4.  Import the generated `.cfg` file into LibreOffice as described in the Installation section.
 
+## Verification
+
+To verify that the generated configuration files are valid (correct XML structure, valid UNO command format, and no duplicate keys), you can run the included verification script:
+
+```bash
+python3 src/verify_config.py
+```
+
+This static analysis tool checks:
+*   Integrity of the Zip archive.
+*   Presence of required XML files.
+*   Correct XML namespaces.
+*   Duplicate key assignments within a single file.
+*   Valid command format (must start with `.uno:`).
+
 ## Contributing
 
 Feel free to open issues or pull requests to suggest more mappings! The mappings are stored in JSON files in the `mappings/` directory.

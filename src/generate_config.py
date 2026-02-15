@@ -3,6 +3,7 @@ import os
 import zipfile
 import argparse
 import sys
+import xml.sax.saxutils
 
 # Key Mappings
 KEY_MAP = {
@@ -42,6 +43,8 @@ KEY_MAP = {
     "BRACKETRIGHT": "KEY_BRACKETRIGHT",
     "'": "KEY_QUOTELEFT", # Verify
     "QUOTE": "KEY_QUOTELEFT",
+    "<": "KEY_LESS",
+    ">": "KEY_GREATER",
 }
 
 # Populate standard keys
@@ -140,7 +143,11 @@ def create_xml(mappings):
             print(f"Warning: Could not parse key for {shortcut}")
             continue
 
-        attr_str = f'accel:code="{code}" xlink:href="{command}"'
+        # Escape special characters in XML attributes
+        command_escaped = xml.sax.saxutils.escape(command)
+        code_escaped = xml.sax.saxutils.escape(code)
+
+        attr_str = f'accel:code="{code_escaped}" xlink:href="{command_escaped}"'
         if modifiers["shift"] == "true":
             attr_str += ' accel:shift="true"'
         if modifiers["mod1"] == "true":
