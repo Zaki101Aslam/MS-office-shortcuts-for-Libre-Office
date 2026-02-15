@@ -76,6 +76,24 @@ This static analysis tool checks:
 *   Duplicate key assignments within a single file.
 *   Valid command format (must start with `.uno:`).
 
+### End-to-End GUI Verification
+
+To verify that the shortcuts actually work in a real LibreOffice instance, you can run the GUI verification script. This script **simulates keystrokes** (typing, deleting, selecting, saving) and verifies the resulting document content.
+
+**Prerequisites:**
+*   A graphical desktop environment (Windows, Linux with X11/Wayland, or macOS).
+*   LibreOffice installed and reachable via `libreoffice` or `soffice` command.
+*   Python libraries:
+    ```bash
+    pip install pyautogui odfpy
+    ```
+
+**Running the Test:**
+```bash
+python3 src/verify_shortcuts_gui.py
+```
+*Note: Do not touch your mouse or keyboard while the test is running.*
+
 ## Contributing
 
 Feel free to open issues or pull requests to suggest more mappings! The mappings are stored in JSON files in the `mappings/` directory.
