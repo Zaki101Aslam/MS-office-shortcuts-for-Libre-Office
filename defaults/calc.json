@@ -26,5 +26,12 @@
     { "command_name": "Delete Content", "uno_command": ".uno:ClearContents", "ms_shortcut": "Backspace" },
     { "command_name": "Delete Content", "uno_command": ".uno:ClearContents", "ms_shortcut": "Delete" },
     { "command_name": "Edit Cell", "uno_command": ".uno:SetInputMode", "ms_shortcut": "F2" },
-    { "command_name": "Recalculate", "uno_command": ".uno:Calculate", "ms_shortcut": "F9" }
+    { "command_name": "Recalculate", "uno_command": ".uno:Calculate", "ms_shortcut": "F9" },
+    { "command_name": "Escape", "uno_command": ".uno:Escape", "ms_shortcut": "Esc" },
+    { "command_name": "Tab", "uno_command": ".uno:JumpToNextCell", "ms_shortcut": "Tab" },
+    { "command_name": "Enter", "uno_command": ".uno:JumpToNextCell", "ms_shortcut": "Enter" },
+    { "command_name": "Up", "uno_command": ".uno:GoUp", "ms_shortcut": "Up" },
+    { "command_name": "Down", "uno_command": ".uno:GoDown", "ms_shortcut": "Down" },
+    { "command_name": "Left", "uno_command": ".uno:GoLeft", "ms_shortcut": "Left" },
+    { "command_name": "Right", "uno_command": ".uno:GoRight", "ms_shortcut": "Right" }
 ]
