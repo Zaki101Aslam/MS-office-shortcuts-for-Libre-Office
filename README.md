@@ -92,7 +92,7 @@ To verify that the shortcuts actually work in a real LibreOffice instance, you c
 ```bash
 python3 src/verify_shortcuts_gui.py
 ```
-*Note: Do not touch your mouse or keyboard while the test is running.*
+*Note: Do not touch your mouse or keyboard while the test is running. The test will perform typing, backspace, delete, and selection operations and strictly verify the output document content.*
 
 ## Contributing
 
