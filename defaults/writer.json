@@ -28,5 +28,12 @@
     { "command_name": "Line Break", "uno_command": ".uno:InsertLinebreak", "ms_shortcut": "Shift+Enter" },
     { "command_name": "Bold", "uno_command": ".uno:Bold", "ms_shortcut": "Ctrl+B" },
     { "command_name": "Italic", "uno_command": ".uno:Italic", "ms_shortcut": "Ctrl+I" },
-    { "command_name": "Underline", "uno_command": ".uno:Underline", "ms_shortcut": "Ctrl+U" }
+    { "command_name": "Underline", "uno_command": ".uno:Underline", "ms_shortcut": "Ctrl+U" },
+    { "command_name": "Escape", "uno_command": ".uno:Escape", "ms_shortcut": "Esc" },
+    { "command_name": "Tab", "uno_command": ".uno:JumpToNextRegion", "ms_shortcut": "Tab" },
+    { "command_name": "Enter", "uno_command": ".uno:InsertPara", "ms_shortcut": "Enter" },
+    { "command_name": "Up", "uno_command": ".uno:GoUp", "ms_shortcut": "Up" },
+    { "command_name": "Down", "uno_command": ".uno:GoDown", "ms_shortcut": "Down" },
+    { "command_name": "Left", "uno_command": ".uno:GoLeft", "ms_shortcut": "Left" },
+    { "command_name": "Right", "uno_command": ".uno:GoRight", "ms_shortcut": "Right" }
 ]
